@@ -1,5 +1,4 @@
 import { KnitServer as Knit, RemoteSignal, Signal } from "@rbxts/knit";
-import { RunService } from "@rbxts/services";
 import DataStore2 from "@rbxts/datastore2";
 import Logger from "shared/Logger";
 
@@ -9,7 +8,7 @@ declare global {
     }
 }
 
-const keys = ["characterSetups", "partySetup", "location", "adventureXP", "equippedCharacter", "nickname", "newPlayer"];
+const keys = ["characterSetups", "partySetup", "location", "adventureXP", "equippedCharacter", "nickname", "newPlayer", "coins", "divinityCoins"];
 const DataService = Knit.CreateService({
     Name: "DataService",
 

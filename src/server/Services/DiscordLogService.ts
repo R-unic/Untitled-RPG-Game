@@ -24,7 +24,7 @@ const DiscordLogService = Knit.CreateService({
         const data = HTTP.JSONEncode({
             WebhookURL: this.WebhookURL,
             WebhookData: {
-                username: "Untitled RPG Game Logger",
+                username: "Divine Impulse Logger",
                 embeds: [
                     {
                         title: logType,

@@ -1,4 +1,4 @@
-import { KnitServer as Knit } from "@rbxts/knit";
+import { Janitor, KnitServer as Knit } from "@rbxts/knit";
 import { Players } from "@rbxts/services";
 import { Character } from "shared/Classes/Character";
 import CharacterList from "server/Classes/CharacterList";
@@ -15,10 +15,12 @@ const DataManager = Knit.CreateService({
     
     KnitStart(): void {
         Logger.ComponentActive(this.Name);
+
         const data = Knit.GetService("DataService");
         Players.PlayerAdded.Connect(plr => {
             task.wait(3.2);
-            data.Store<[number, number, number]>(plr, "location", [0, 0, 0]);
+            
+            data.Store<[number, number, number]>(plr, "location", [0, 5, 0]);
             data.Store<number>(plr, "adventureXP", 0);
             data.Store<number>(plr, "equippedCharacter", 1);
             data.Store<Character[]>(plr, "characterSetups", [CharacterList[0]]);
@@ -26,12 +28,15 @@ const DataManager = Knit.CreateService({
             data.Store<boolean>(plr, "newPlayer", true);
             data.Store<string>(plr, "nickname", "Adventurer");
 
-            const loc = data.Get<[number, number, number]>(plr, "location")
-            let conn: RBXScriptConnection;
-            conn = plr.CharacterAdded.Connect(c => {
+            data.Store<number>(plr, "coins", 200);
+            data.Store<number>(plr, "divinityCoins", 0);
+
+            const loc = data.Get<[number, number, number]>(plr, "location");
+            const janitor = new Janitor;
+            janitor.Add(plr.CharacterAdded.Connect(c => {
                 c.SetPrimaryPartCFrame(new CFrame(loc[0], loc[1], loc[2]));
-                conn.Disconnect();
-            });
+                janitor.Cleanup();
+            }));
         });
     }
 });

@@ -12,7 +12,7 @@ const HealthService = Knit.CreateService({
     Name: "HealthService",
 
     KnitStart() {
-        Players.PlayerAdded.Connect(p => {
+        const conn = Players.PlayerAdded.Connect(p => {
             const chars = Knit.GetService("CharacterService");
             const data = Knit.GetService("DataService");
             data.DataUpdated.Connect((plr: Player, name: string, equippedChar) => {
@@ -26,6 +26,7 @@ const HealthService = Knit.CreateService({
                 }
             });
         });
+        conn.Disconnect();
     },
 });
 

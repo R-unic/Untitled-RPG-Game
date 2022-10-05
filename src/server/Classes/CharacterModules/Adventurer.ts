@@ -7,13 +7,13 @@ export = new Character(
     Stars.Five,  //rarity of character
     Gender.Male, //changeable since adventurer?????
     false,  //obtainable from wishing
-    {
+    { //image ids
         Profile: 123456,
         Bust: 123456,
         Skill: 123456,
         Burst: 123456,
     },
-    {
+    { //burst data
         Burst: {
             Name: "burst name",
             Cooldown: 35,
@@ -26,7 +26,7 @@ export = new Character(
         }
     },
     { //default state
-        Stats: new CharacterStats(1200, 100, 20), //base health, attack, and resist
+        Stats: new CharacterStats(1200, 100, 10), //base health, attack, and resist
         Equipped: {
             Weapon: "Default Sword",
             Accessories: {
